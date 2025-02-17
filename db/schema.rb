@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.1].define(version: 2025_02_17_082617) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "cameras", force: :cascade do |t|
-    t.string "brand"
-    t.string "model"
-    t.text "description"
-    t.decimal "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
-ActiveRecord::Schema[7.1].define(version: 2025_02_17_074858) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_17_090028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,7 +40,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_17_074858) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
->>>>>>> 0102511ee4934161270358ed99b0e3367da585e2
+  end
+
+  create_table "cameras", force: :cascade do |t|
+    t.string "brand"
+    t.string "model"
+    t.text "description"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
