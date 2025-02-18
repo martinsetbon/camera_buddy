@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :cameras, only: [:index, :show] do
     resources :reservations, only: :create
   end
-  resources :reservations, only:[:index, :update]
+  resources :reservations, only: [:index, :update]
 
   namespace :owner do
     resources :reservations, only: :index
