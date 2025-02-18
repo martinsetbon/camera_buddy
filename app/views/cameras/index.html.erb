@@ -1,1 +1,10 @@
-<%= Camera.all %>
+<h1>Available Cameras</h1>
+
+<% @cameras.each do |camera| %>
+  <div class="camera-card">
+    <h2><%= camera.brand %> <%= camera.model %></h2>
+    <p><%= camera.description %></p>
+    <p><%= camera.price %></p>
+    <%= link_to 'Reserve', new_camera_reservation_path(camera), class: 'btn btn-primary' %>
+  </div>
+<% end %>

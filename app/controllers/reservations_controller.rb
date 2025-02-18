@@ -1,22 +1,20 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
   before_action :correct_user_or_owner, only: [:update, :destroy]
+  before_action :set_camera, only: [:new, :create]
 
-  # see all reservations
+  # See all reservations
   def index
     @reservations = current_user.reservations
   end
-  #make a reservation
+
+  # Make a reservation
   def new
-    @camera = Camera.find(params[:camera_id])
     @reservation = Reservation.new
   end
 
   def create
-    @camera = Camera.find(params[:camera_id])
-    @reservation = current_user.reservations.build(reservation_params)
-    @reservation.camera = @camera
-    @reservation.status = "pending"  # Default status
+    @reservation = current_user.reservations.build(reservation_params.merge(camera: @camera, status: "pending"))
 
     if @reservation.save
       redirect_to reservations_path, notice: "Reservation created successfully."
@@ -25,19 +23,13 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def show
-    # The reservation is already set by the before_action
-  end
+  def show; end
 
   def update
-    if @reservation.user == current_user && @reservation.status == "pending"
-      if @reservation.update(reservation_params)
-        redirect_to reservation_path(@reservation), notice: "Reservation updated successfully."
-      else
-        render :show, alert: "Unable to update reservation."
-      end
+    if @reservation.user == current_user && @reservation.status == "pending" && @reservation.update(reservation_params)
+      redirect_to @reservation, notice: "Reservation updated successfully."
     else
-      redirect_to reservations_path, alert: "You can't update this reservation."
+      redirect_to reservations_path, alert: "Unable to update reservation."
     end
   end
 
@@ -48,5 +40,19 @@ class ReservationsController < ApplicationController
     else
       redirect_to reservations_path, alert: "You are not authorized to cancel this reservation."
     end
+  end
+
+  private
+
+  def set_camera
+    @camera = Camera.find(params[:camera_id])
+  end
+
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
+  end
+
+  def reservation_params
+    params.require(:reservation).permit(:start_date, :end_date)
   end
 end

@@ -1,5 +1,19 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<% if user_signed_in? %>
-  <%= current_user.email %>
-<% end %>
+<h1>Welcome to Camera Buddy</h1>
+
+<h2>Available Cameras</h2>
+
+<div class="row">
+  <% @cameras.each do |camera| %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="<%= image_url('https://www.orionphotogroup.com/wp-content/uploads/2023/09/OPG-Blog-Best-Professional-Canon-Cameras-That-Should-Be-On-Every-Photographers-List-10-12-2023-scaled.jpg') %>" class="card-img-top" alt="<%= camera.brand %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= camera.brand %> <%= camera.model %></h5>
+          <p class="card-text"><%= camera.description %></p>
+          <p class="card-text"><strong>Price:</strong> $<%= camera.price %></p>
+          <%= link_to 'View Details', camera_path(camera), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
