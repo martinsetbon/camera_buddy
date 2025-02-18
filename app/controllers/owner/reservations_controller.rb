@@ -26,6 +26,25 @@ class Owner::ReservationsController < ApplicationController
     end
   end
 
+  # accept a reservation
+  def accept
+    if @reservation.camera.user == current_user
+      @reservation.update(accepted: true)  # Mark the reservation as accepted
+      redirect_to owner_reservations_path, notice: "Reservation accepted."
+    else
+      redirect_to owner_reservations_path, alert: "You are not authorized to accept this reservation."
+    end
+  end
+
+  # reject a reservation
+  def reject
+    if @reservation.update(status: "rejected")
+      redirect_to owner_reservation_path(@reservation), notice: "Reservation rejected."
+    else
+      redirect_to owner_reservations_path, alert: "Failed to reject reservation."
+    end
+  end
+
   # Cancel a reservation
   def destroy
     if @reservation.status == "pending"
