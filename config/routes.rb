@@ -9,5 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :cameras, only: [:index, :show]
+  resources :cameras, only: [:index, :show] do
+    resources :reservations, only: :create
+  end
+  resources :reservations, only:[:index, :update]
+
+  namespace :owner do
+    resources :reservations, only: :index
+  end
+
 end
