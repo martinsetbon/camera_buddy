@@ -1,6 +1,54 @@
 class Owner::ReservationsController < ApplicationController
+  before_action :authenticate_user!  # Ensures the user is signed in
+  before_action :set_reservation, only: [:show, :update, :destroy]
+  before_action :ensure_owner, only: [:update, :destroy]
 
+  # Display all reservations for the owner of the camera
   def index
-    @reservations = current_user.reservations_as_owner
+    @reservations = current_user.cameras.flat_map(&:reservations)
+  end
+
+  # Show a specific reservation
+  def show
+    # Reservation already set by before_action
+  end
+
+  # Update the status of a reservation (e.g., accept or reject)
+  def update
+    if @reservation.status == "pending"
+      if @reservation.update(reservation_params)
+        redirect_to owner_reservations_path, notice: "Reservation updated successfully."
+      else
+        render :show, alert: "Unable to update reservation."
+      end
+    else
+      redirect_to owner_reservations_path, alert: "This reservation has already been processed."
+    end
+  end
+
+  # Cancel a reservation
+  def destroy
+    if @reservation.status == "pending"
+      @reservation.destroy
+      redirect_to owner_reservations_path, notice: "Reservation canceled."
+    else
+      redirect_to owner_reservations_path, alert: "This reservation cannot be canceled."
+    end
+  end
+
+  private
+
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
+  end
+
+  def ensure_owner
+    unless @reservation.camera.user == current_user
+      redirect_to owner_reservations_path, alert: "You do not have permission to manage this reservation."
+    end
+  end
+
+  def reservation_params
+    params.require(:reservation).permit(:status)
   end
 end
