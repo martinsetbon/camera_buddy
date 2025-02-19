@@ -1,28 +1,22 @@
-<h2>My Reservations</h2>
+<div class="container mt-5 d-flex flex-column align-items-center">
+  <h2 class="text-center">My Reservations</h2>
+  <% if @reservations.any? %>
+    <% @reservations.each do |reservation| %>
+      <div class="reservation-card reservation-card-infos">
+        <%= link_to camera_path(reservation.camera) do %>
+          <%= image_tag reservation.camera.photo %>
+        <% end %>
+        <div>
+          <h3><%= reservation.camera.brand %> <%= reservation.camera.model %></h3>
+          <p><%= reservation.start_date %></p>
+          <p><%= reservation.end_date %></p>
+          <p><%= reservation.status.capitalize %></p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>You have no reservations yet.</p>
+  <% end %>
 
-<% if @reservations.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Camera</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @reservations.each do |reservation| %>
-        <tr>
-          <td><%= reservation.camera.brand %> <%= reservation.camera.model %></td>
-          <td><%= reservation.start_date %></td>
-          <td><%= reservation.end_date %></td>
-          <td><%= reservation.status.capitalize %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>You have no reservations yet.</p>
-<% end %>
-
-<%= link_to "Back to Cameras", cameras_path, class: "btn btn-primary" %>
+  <%= link_to "Back to Cameras", cameras_path, class: "btn btn-secondary" %>
+</div>
