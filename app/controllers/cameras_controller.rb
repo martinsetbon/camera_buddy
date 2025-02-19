@@ -1,7 +1,14 @@
 class CamerasController < ApplicationController
   # '/cameras'
+
+
+
   def index
-    @cameras = Camera.all
+        if params[:brand].present?
+          @cameras = Camera.where(brand: params[:brand])
+        else
+          @cameras = Camera.all
+        end
   end
 
   # '/cameras/1'
