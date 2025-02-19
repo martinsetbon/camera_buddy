@@ -1,5 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<% if user_signed_in? %>
-  <%= current_user.email %>
-<% end %>
+<div class="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="text-white">CAMERA BUDDY</h1>
+          <p class="fs-4 quote text-white">"Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+          Veritatis, tempore. Quasi eos enim quaerat ipsa deleniti blanditiis tempora."</p>
+          <%= link_to 'Find cameras', cameras_path, class: 'btn btn-primary mb-3' %>
+        </div>
+      </div>
+    </div>
+</div>
