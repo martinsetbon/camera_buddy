@@ -1,6 +1,4 @@
-<%= simple_form_for [camera, reservation] do |f| %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-
+<%= simple_form_for([camera, reservation], html: { data: { controller: 'datepicker' }}) do |f| %>
+  <%= f.input :start_date, as: :string, input_html: { data: { action: 'change->datepicker#updateDates', datepicker_target: 'startDate' }} %>
   <%= f.button :submit, 'Submit Reservation', class: 'btn btn-primary' %>
 <% end %>
