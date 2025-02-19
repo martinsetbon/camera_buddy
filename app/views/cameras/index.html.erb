@@ -1,10 +1,30 @@
-<h1>Available Cameras</h1>
+<div class="container">
+    <h1 class="text-center mb-3">All the cameras</h1>
+    <%= link_to "Clear filters", cameras_path(@cameras), class: 'btn btn-primary' %>
+<div class="filters d-flex justify-content-between align-items-center">
+  <!-- Link to filter by Canon brand -->
+  <%= link_to cameras_path(brand: 'Canon') do %>
+    <%= image_tag("canon.png", alt: "Canon", class: "brand-logo") %>
+  <% end %>
 
-<% @cameras.each do |camera| %>
-  <div class="camera-card">
-    <h2><%= camera.brand %> <%= camera.model %></h2>
-    <p><%= camera.description %></p>
-    <p><%= camera.price %></p>
-    <%= link_to 'Reserve', new_camera_reservation_path(camera), class: 'btn btn-primary' %>
+  <!-- Link to filter by Fujifilm brand -->
+  <%= link_to cameras_path(brand: "Fujifilm") do %>
+    <%= image_tag("fujifilm.png", alt: "Fujifilm", class: "brand-logo") %>
+  <% end %>
+
+  <!-- Link to filter by Nikon brand -->
+  <%= link_to cameras_path(brand: "Nikon") do %>
+    <%= image_tag("nikon.jpg", alt: "Nikon", class: "brand-logo") %>
+  <% end %>
+
+  <!-- Link to filter by Sony brand -->
+  <%= link_to cameras_path(brand: "Sony") do %>
+    <%= image_tag("sony.png", alt: "Sony", class: "brand-logo") %>
+  <% end %>
+</div>
+  <div class="cards">
+    <% @cameras.each do |camera| %>
+      <%= render 'card', camera: camera %>
+    <% end %>
   </div>
-<% end %>
+</div>
