@@ -1,0 +1,17 @@
+<h1>Reservation Details</h1>
+
+<p><strong>Camera:</strong> <%= "#{@reservation.camera.brand} #{@reservation.camera.model}" %></p>
+<p><strong>Status:</strong> <%= @reservation.status %></p>
+<p><strong>Start Date:</strong> <%= @reservation.start_date %></p>
+<p><strong>End Date:</strong> <%= @reservation.end_date %></p>
+
+<% if @reservation.status == "pending" %>
+  <%= link_to "Accept", accept_owner_reservation_path(@reservation), method: :patch, class: "btn btn-primary" %>
+  <%= link_to "Reject", reject_owner_reservation_path(@reservation), method: :patch, class: "btn btn-secondary" %>
+<% end %>
+
+<% if @reservation.accepted %>
+  <p>This reservation has already been accepted.</p>
+<% end %>
+
+<%= link_to "Back to Reservations", owner_reservations_path %>
