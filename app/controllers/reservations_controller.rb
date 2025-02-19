@@ -14,12 +14,20 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.build(reservation_params.merge(camera: @camera, status: "pending"))
+    # @reservation = current_user.reservations.build(reservation_params.merge(camera: @camera, status: "pending"))
+    @reservation = Reservation.new(reservation_params)
+    dates = reservation_params[:start_date].split(' to ')
+
+    @reservation.start_date = Date.parse(dates[0])
+    @reservation.end_date = Date.parse(dates[1])
+    @reservation.user = current_user
+    @reservation.camera = @camera
+    @reservation.status = 'pending'
 
     if @reservation.save
       redirect_to reservations_path, notice: "Reservation created successfully."
     else
-      render :new
+      render "cameras/show", status: :unprocessable_entity
     end
   end
 

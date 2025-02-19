@@ -1,0 +1,48 @@
+.container {
+  justify-content: center;
+  align-items: center;
+}
+
+
+.reservation-card {
+  display: block; /* Ensures cards take full width */
+  width: 90%;
+  max-width: 800px;
+  margin-bottom: 8px; /* Adds spacing between cards */
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  overflow: hidden;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 20px rbga(0, 0, 0, 0.15)
+}
+
+.reservation-card img {
+  height: 100%;
+  width: 120px;
+  object-fit: cover;
+}
+
+.reservation-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.reservation-card p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 4px;
+}
+
+.reservation-card .reservation-card-infos {
+  display: flex;
+  flex-direction: column; /* Stack children (h2 and p) vertically */
+  padding: 8px;
+  justify-content: flex-start;
+}

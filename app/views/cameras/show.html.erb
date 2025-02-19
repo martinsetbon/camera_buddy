@@ -1,5 +1,17 @@
-<h1><%= @camera.brand %> <%= @camera.model %></h1>
-<p><%= @camera.description %></p>
-<p><strong>Price:</strong> $<%= @camera.price %></p>
+<div class="container mt-4">
+   <h3 class="mb-0"><%= @camera.brand %> - <%= @camera.model %></h3>
 
-<%= render 'reservations/form', reservation: @reservation, camera: @camera %>
+  <div class="card-body mt-4">
+    <p><strong>Model:</strong> <%= @camera.model %></p>
+    <p><strong>Description:</strong> <%= @camera.description %></p>
+    <p><strong>Price:</strong> ¥<%= @camera.price %></p>
+  </div>
+  <div>
+    <h4 class="mt-4">Reserve This Camera 📅</h4>
+    <%= render 'reservations/form', reservation: @reservation, camera: @camera %>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between mt-3">
+    <%= link_to 'Back to home', cameras_path, class: "btn btn-secondary" %>
+  <div>
+</div>
