@@ -31,8 +31,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def show; end
-
   def update
     if @reservation.user == current_user && @reservation.status == "pending" && @reservation.update(reservation_params)
       redirect_to @reservation, notice: "Reservation updated successfully."
