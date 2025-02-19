@@ -2,4 +2,4 @@
 <p><%= @camera.description %></p>
 <p><strong>Price:</strong> $<%= @camera.price %></p>
 
-<%= link_to 'Make a Reservation', new_camera_reservation_path(@camera), class: 'btn btn-primary' %>
+<%= render 'reservations/form', reservation: @reservation, camera: @camera %>
