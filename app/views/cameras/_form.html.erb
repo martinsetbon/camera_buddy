@@ -1,0 +1,23 @@
+<%= simple_form_for camera do |f| %>
+  <div class="form-group">
+    <%= f.label :brand, "Select Brand" %>
+    <%= f.select :brand, Camera::BRANDS, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :model, "Select Model" %>
+    <%= f.text_area :model, class: "form-control", placeholder: "Enter model name" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, class: "form-control", placeholder: "Enter camera details" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, "Price (in JPY)" %>
+    <%= f.number_field :price, class: "form-control", min: 0 %>
+  </div>
+
+  <%= f.submit "Save Camera", class: "btn btn-primary mt-3" %>
+<% end %>
