@@ -16,7 +16,7 @@ if User.count.zero?
   User.create(email: 'ayush@example.com', password: "123123")
   User.create(email: 'jedd@example.com', password: "123123")
 
-end
+endd
 
 Camera.create([
   { brand: 'Sony', model: 'Alpha 7C', description: 'Compact full-frame mirrorless camera.', price: 1200, user_id: User.all.sample.id },

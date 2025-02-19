@@ -1,0 +1,9 @@
+<h1>Your Reservations</h1>
+
+<% @reservations.each do |reservation| %>
+  <div class="card p-3 mb-3">
+    <h3><%= reservation.camera.brand %> - <%= reservation.camera.model %></h3>
+    <p>From: <%= reservation.start_date %> To: <%= reservation.end_date %></p>
+    <p>Price: $<%= reservation.camera.price %></p>
+  </div>
+<% end %>
