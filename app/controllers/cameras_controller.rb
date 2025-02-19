@@ -5,6 +5,7 @@ class CamerasController < ApplicationController
 
   def index
         if params[:brand].present?
+          @show_filter = true
           @cameras = Camera.where(brand: params[:brand])
         else
           @cameras = Camera.all
