@@ -1,0 +1,24 @@
+<h2>Reservation Details</h2>
+
+<p><strong>Camera:</strong> <%= @reservation.camera.brand %> <%= @reservation.camera.model %></p>
+<p><strong>Start Date:</strong> <%= @reservation.start_date %></p>
+<p><strong>End Date:</strong> <%= @reservation.end_date %></p>
+<p><strong>Status:</strong> <%= @reservation.status.capitalize %></p>
+
+<% if @reservation.status == "pending" && @reservation.user == current_user %>
+  <%= form_with(model: @reservation, local: true) do |form| %>
+    <div>
+      <%= form.label :status %>
+      <%= form.select :status, ["pending", "approved", "canceled"], selected: @reservation.status %>
+    </div>
+    <%= form.submit "Update Reservation", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= form_with(model: @reservation, method: :delete, local: true) do |form| %>
+    <%= form.submit "Cancel Reservation", class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Back to Reservations", reservations_path, class: "btn btn-secondary" %>
+<%= link_to "Back to Camera", camera_path(@reservation.camera), class: "btn btn-secondary" %>
+<%= link_to "Back to Homepage", root_path, class: "btn btn-secondary" %>

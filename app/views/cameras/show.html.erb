@@ -8,11 +8,7 @@
   </div>
   <div>
     <h4 class="mt-4">Reserve This Camera 📅</h4>
-    <%= simple_form_for Reservation.new, url: reservations_path, method: :post do |f| %>
-    <%= f.hidden_field :camera_id, value: @camera.id %>
-    <%= f.input :start_date, as: :string, input_html: { data: { controller: 'datepicker' } } %>
-    <%= f.submit "Reserve Camera", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'reservations/form', reservation: @reservation, camera: @camera %>
   </div>
 
   <div class="card-footer d-flex justify-content-between mt-3">

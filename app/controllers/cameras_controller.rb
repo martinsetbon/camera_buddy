@@ -1,14 +1,21 @@
 class CamerasController < ApplicationController
   # '/cameras'
+
+
+
   def index
-    @cameras = Camera.all
+        if params[:brand].present?
+          @cameras = Camera.where(brand: params[:brand])
+        else
+          @cameras = Camera.all
+        end
   end
 
   # '/cameras/1'
   def show
     # Rails pulls the id from the URL and puts in the params
     @camera = Camera.find(params[:id])
-    @reservation = Reservation.new(camera: @camera)
+    @reservation = Reservation.new
   end
 
   # '/cameras/new'

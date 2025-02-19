@@ -1,9 +1,28 @@
-<h1>Your Reservations</h1>
+<h2>My Reservations</h2>
 
-<% @reservations.each do |reservation| %>
-  <div class="card p-3 mb-3">
-    <h3><%= reservation.camera.brand %> - <%= reservation.camera.model %></h3>
-    <p>From: <%= reservation.start_date %> To: <%= reservation.end_date %></p>
-    <p>Price: $<%= reservation.camera.price %></p>
-  </div>
+<% if @reservations.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Camera</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.camera.brand %> <%= reservation.camera.model %></td>
+          <td><%= reservation.start_date %></td>
+          <td><%= reservation.end_date %></td>
+          <td><%= reservation.status.capitalize %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have no reservations yet.</p>
 <% end %>
+
+<%= link_to "Back to Cameras", cameras_path, class: "btn btn-primary" %>
