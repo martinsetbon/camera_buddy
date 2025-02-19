@@ -1,12 +1,29 @@
+
 <div class="banner">
+<div class="home-navbar d-flex justify-content-between align-items-center">
+  <%= link_to cameras_path do %>
+    <i class="fa-solid fa-camera-retro"></i>
+  <% end %>
+  <%= link_to "Login", new_user_session_path, class: "nav-link text-white" %>
+  </div>
   <div class="container">
     <div class="row">
-      <div class="col-12 text-center">
-        <h1 class="text-white">CAMERA BUDDY</h1>
-          <p class="fs-4 quote text-white">"Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-          Veritatis, tempore. Quasi eos enim quaerat ipsa deleniti blanditiis tempora."</p>
-          <%= link_to 'Find cameras', cameras_path, class: 'btn btn-primary mb-3' %>
+      <div class="col-12 text-center justify-content-center align-items-center">
+        <div class="app-name d-flex justify-content-center align-items-center"><i class="fa-solid fa-camera-retro"></i><h1 class="text-white">CAMERA BUDDY</h1></div>
+          <p class="fs-4 quote text-white">"Find the camera that fits your style and your realise your projects, no need to buy it, you can just RENT it. <br> Rent your own cameras to other people and make theire projects come true !</p>
+          <%= link_to 'Find cameras', cameras_path, class: 'btn btn-primary mt-3' %>
         </div>
       </div>
     </div>
-</div>
+    <div class="home-footer mt-3">
+      <div class="container">
+        <p class="text-white text-center pt-3">@Camera Buddy all right reserved</p>
+          <hr class="text-white">
+            <div class="filters d-flex justify-content-center align-items-center">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+          </div>
+        </div>
+      </div>
+    </div>
