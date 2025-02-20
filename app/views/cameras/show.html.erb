@@ -1,26 +1,21 @@
-<div class="show-container container mt-5">
+<div class="container mt-5">
   <!-- Camera Title -->
-  <h3 class="text-center mb-4 text-primary" style="font-size: 2.2rem;">
-    <%= @camera.brand %> - <%= @camera.model %>
-  </h3>
+  <h3 class="text-center mb-4 text-primary"><%= @camera.brand %> - <%= @camera.model %></h3>
 
-  <div class="show-card card mb-4 mx-auto" style="max-width: 1100px;">
+  <div class="card mb-4 mx-auto" style="max-width: 1100px;">
     <div class="row g-0">
       <!-- Camera Image -->
       <div class="col-md-6">
-        <%= image_tag @camera.photo,
-          class: "img-fluid h-100 w-100",
-          alt: @camera.brand,
-          style: "object-fit: cover; border-radius: 16px 0 0 16px;" %>
+
+        <%= cl_image_tag(@camera.photo.key, class: "img-fluid rounded-start h-100 w-100", alt: @camera.brand) %>
+
       </div>
 
       <!-- Camera Details -->
       <div class="col-md-6 d-flex align-items-center">
-        <div class="card-main card-body">
-          <p class="card-text mt-3 fs-5"><%= @camera.description %></p>
-          <p class="card-text fs-4">
-            <strong class="fs-4">Price:</strong> $<%= @camera.price %>
-          </p>
+        <div class="card-body">
+          <p class="card-text text-muted"><%= @camera.description %></p>
+          <p class="card-text"><strong>Price:</strong> ¥<%= @camera.price %></p>
 
           <!-- Reserve Button (Collapsible Form) -->
           <button class="btn btn-outline-primary w-100 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#reserveForm">
