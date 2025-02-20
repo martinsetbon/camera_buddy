@@ -1,6 +1,13 @@
 <div class="card" style="width: 18rem;">
 <div class="photo-wrapper">
+<% if camera.photo.attached? %>
 <%= cl_image_tag(camera.photo.key, class: "card-img-top") %>
+<% else %>
+ <div class="d-flex align-items-center card-img-top justify-content-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%=  asset_path('no-photo.png') %>); background-size:cover; background-position:center; height:250px;">
+ Please Upload a picture
+ </div>
+<% end %>
+
 </div>
   <div class="card-body">
   <div class="d-flex justify-content-between">
