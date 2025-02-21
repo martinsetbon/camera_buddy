@@ -26,6 +26,8 @@ class CamerasController < ApplicationController
     # Rails pulls the id from the URL and puts in the params
     @camera = Camera.find(params[:id])
     @reservation = Reservation.new
+    @reviews = @camera.reviews.includes(:user)
+    @review = Review.new
   end
 
   # '/cameras/new'
