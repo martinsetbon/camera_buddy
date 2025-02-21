@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   end
   resources :reservations, only: [:index, :update]
 
+  resources :cameras do
+    resources :reviews, only: [:create]
+  end
+  resources :reviews, only: [:destroy]
+
+
   namespace :owner do
     resources :reservations, only: [:index, :show, :update, :destroy] do
       member do

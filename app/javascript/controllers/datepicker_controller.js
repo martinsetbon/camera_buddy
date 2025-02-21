@@ -10,6 +10,7 @@ export default class extends Controller {
       mode: "range",
       dateFormat: "Y-m-d",
       minDate: "today",
+      ariaDateFormat: "",
     });
   }
 }

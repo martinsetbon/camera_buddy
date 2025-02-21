@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :reservations_as_owner, through: :flats, source: :reservations
   has_many :cameras
   has_many :reservations
+  has_many :reviews, dependent: :destroy
 end
