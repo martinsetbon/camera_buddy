@@ -1,11 +1,16 @@
-<div class="container">
+<div class="row ">
+<div class="col-12 border-bottom">
   <h1 class="text-center mb-3 mt-3">All the cameras</h1>
+  </div>
+  </div>
+<div class="row">
+  <div class="col-8">
 <% if @show_filter %>
 <%= link_to "Clear filters", cameras_path(), class: 'btn btn-primary' %>
 <% end %>
 
 
-  <div class="filters d-flex justify-content-between align-items-center">
+  <div class="filters d-flex justify-content-between align-items-center ">
     <!-- Link to filter by Canon brand -->
     <%= link_to cameras_path(brand: 'Canon') do %>
       <%= image_tag("canon.png", alt: "Canon", class: "brand-logo") %>
@@ -31,5 +36,12 @@
     <% @cameras.each do |camera| %>
       <%= render 'card', camera: camera %>
     <% end %>
+  </div>
+  </div>
+  <div class="col-4">
+    <div style="width: 100%; height: 100% !important; overflow: auto;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
 </div>

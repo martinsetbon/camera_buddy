@@ -10,6 +10,15 @@ class CamerasController < ApplicationController
         else
           @cameras = Camera.all
         end
+
+        @markers = @cameras.geocoded.map do |camera|
+          {
+            lat: camera.latitude,
+            lng: camera.longitude,
+            info_window_html: render_to_string(partial: "info_window", locals: {camera: camera}),
+            marker_html: render_to_string(partial: "marker", locals: {camera: camera}) # Pass the camera to the partial
+          }
+        end
   end
 
   # '/cameras/1'
@@ -28,14 +37,13 @@ class CamerasController < ApplicationController
   # we can only trigger this action, by submitting a form
   # it's only purpose is to create, so it doesnt have a view
   def create
+
     @camera = Camera.new(camera_params)
+    @camera.user = current_user
     if @camera.save
-      # redirect_to cameras_path
       redirect_to camera_path(@camera)
     else
-      # if the camera doesnt save, we want to show the form again
-      # render the form page again aka new.html.erb
-      render :new, status: :unprocessable_entity # 422
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -70,6 +78,6 @@ class CamerasController < ApplicationController
 
   def camera_params
     # for security reasons, we are whitelisting our params
-    params.require(:camera).permit(:brand, :model, :description, :price)
+    params.require(:camera).permit(:brand, :model, :description, :price, :photo)
   end
 end
