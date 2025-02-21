@@ -6,6 +6,7 @@ class Owner::ReservationsController < ApplicationController
   # Display all reservations for the owner of the camera
   def index
     @cameras = Camera.includes(:reservations).where(user: current_user)
+    #  @reservations = current_user.reservations_as_owner
   end
 
   # Show a specific reservation
