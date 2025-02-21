@@ -3,7 +3,7 @@
   <% if @reservations.any? %>
     <% @reservations.each do |reservation| %>
       <div class="reservation-card reservation-card-infos">
-        <%= link_to camera_path(reservation.camera) do %>
+        <%= link_to camera_path(reservation.camera.photo) do %>
           <%= image_tag reservation.camera.photo %>
         <% end %>
         <div>

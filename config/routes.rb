@@ -15,11 +15,6 @@ Rails.application.routes.draw do
   resources :reservations, only: [:index, :update]
 
   namespace :owner do
-    resources :reservations, only: [:index, :show, :update, :destroy] do
-      member do
-        patch :accept
-        patch :reject
-      end
-    end
+    resources :reservations, only: [:index, :show, :destroy]
   end
 end
