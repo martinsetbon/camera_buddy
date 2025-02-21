@@ -3,35 +3,71 @@
     <div class="col-6 m-auto">
       <div class="flat-form">
         <h1>Add my camera 📷</h1>
-<%= simple_form_for @camera do |f| %>
-  <div class="form-group">
-    <%= f.label :brand, "Select Brand" %>
-    <%= f.select :brand, Camera::BRANDS, {}, class: "form-control" %>
-  </div>
+        <%= simple_form_for @camera do |f| %>
 
-  <div class="form-group">
-    <%= f.label :model, "Select Model" %>
-    <%= f.text_area :model, class: "form-control", placeholder: "Enter model name" %>
-  </div>
+          <div class="form-group">
+            <%= f.label :brand, "Select Brand <span class='text-danger'>*</span>".html_safe %>
+            <%= f.select :brand, Camera::BRANDS, {}, class: "form-control", required: true %>
+            <% if @camera.errors[:brand].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:brand].first %>
+              </div>
+            <% end %>
+          </div>
 
-  <div class="form-group">
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description, class: "form-control", placeholder: "Enter camera details" %>
-  </div>
+          <div class="form-group">
+            <%= f.label :model, "Select Model <span class='text-danger'>*</span>".html_safe %>
+            <%= f.text_area :model, class: "form-control", placeholder: "Enter model name", required: true %>
+            <% if @camera.errors[:model].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:model].first %>
+              </div>
+            <% end %>
+          </div>
 
-  <div class="form-group">
-    <%= f.label :price, "Price per day (in $)" %>
-    <%= f.number_field :price, class: "form-control", min: 0 %>
-  </div>
+          <div class="form-group">
+            <%= f.label :description, "Description <span class='text-danger'>*</span>".html_safe %>
+            <%= f.text_area :description, class: "form-control", placeholder: "Enter camera details", required: true %>
+            <% if @camera.errors[:description].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:description].first %>
+              </div>
+            <% end %>
+          </div>
 
-    <div class="form-group">
-    <%= f.label :photo, "Upload Picture" %>
-    <%= f.file_field :photo, class: "form-control" %>
-  </div>
+          <div class="form-group">
+            <%= f.label :address, "Address <span class='text-danger'>*</span>".html_safe %>
+            <%= f.text_area :address, class: "form-control", placeholder: "Enter an address", required: true %>
+            <% if @camera.errors[:address].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:address].first %>
+              </div>
+            <% end %>
+          </div>
 
-  <%= f.submit "Save Camera", class: "btn btn-primary mt-3" %>
-  <% end %>
-        </div>
+          <div class="form-group">
+            <%= f.label :price, "Price per day (in $) <span class='text-danger'>*</span>".html_safe %>
+            <%= f.number_field :price, class: "form-control", min: 0, required: true %>
+            <% if @camera.errors[:price].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:price].first %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :photo, "Upload Picture" %>
+            <%= f.file_field :photo, class: "form-control" %>
+            <% if @camera.errors[:photo].any? %>
+              <div class="text-danger">
+                <%= @camera.errors[:photo].first %>
+              </div>
+            <% end %>
+          </div>
+
+          <%= f.submit "Save Camera", class: "btn btn-primary mt-3" %>
+        <% end %>
       </div>
     </div>
+  </div>
 </div>
