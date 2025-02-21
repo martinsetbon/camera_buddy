@@ -21,7 +21,7 @@
     <div class="row g-0">
       <div class="col-md-6">
           <% if @camera.photo.attached? %>
-            <%= cl_image_tag(camera.photo.key, class:"show-photo img-fluid h-100 w-100") %>
+            <%= cl_image_tag(@camera.photo.key, class:"show-photo img-fluid h-100 w-100") %>
           <% else %>
           <div class="show-photo img-fluid h-100 w-100 d-flex align-items-center justify-content-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= asset_path('no-photo.png') %>); background-size:cover; background-position:center; height:250px;">
             Please Upload a picture
