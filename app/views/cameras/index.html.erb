@@ -1,17 +1,17 @@
-<div class="row ">
-<div class="col-12 border-bottom">
+
+<div class="border-bottom">
   <h1 class="text-center mb-3 mt-3">All the cameras</h1>
   </div>
-  </div>
-<div class="row">
-  <div class="col-8">
+  <div class="d-flex gap-4 ms-4">
+<div>
 <% if @show_filter %>
 <%= link_to "Clear filters", cameras_path(), class: 'btn btn-primary' %>
 <% end %>
 
 
-  <div class="filters d-flex justify-content-between align-items-center ">
+  <div class="filters d-flex justify-content-between align-items-center border border-dark rounded-pill p-3 mb-3 mt-3">
     <!-- Link to filter by Canon brand -->
+
     <%= link_to cameras_path(brand: 'Canon') do %>
       <%= image_tag("canon.png", alt: "Canon", class: "brand-logo") %>
     <% end %>
@@ -32,16 +32,16 @@
     <% end %>
   </div>
 
+
   <div class="cards">
     <% @cameras.each do |camera| %>
       <%= render 'card', camera: camera %>
     <% end %>
+
   </div>
   </div>
-  <div class="col-4">
-    <div style="width: 100%; height: 100% !important; overflow: auto;"
+    <div class="sticky-map" style="width: 100%; height: 100vh !important; overflow: auto;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
-</div>

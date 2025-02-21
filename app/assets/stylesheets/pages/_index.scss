@@ -6,10 +6,19 @@
 width: 100px
 }
 
+.brand-logo-card{
+width: 80px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 24px;
+}
+
+.sticky-map{
+  position:sticky;
+  top: 56px;
 }
 
 .photo-wrapper{
