@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy]
-  before_action :correct_user_or_owner, only: [:update, :destroy]
+  before_action :set_reservation, only: [:show, :destroy]
+  # before_action :correct_user_or_owner, only: [:update, :destroy]
   before_action :set_camera, only: [:new, :create]
 
   # See all reservations
@@ -31,13 +31,25 @@ class ReservationsController < ApplicationController
     end
   end
 
+  # def update
+  #   if @reservation.user == current_user && @reservation.status == "pending" && @reservation.update(reservation_params)
+  #     redirect_to @reservation, notice: "Reservation updated successfully."
+  #   else
+  #     redirect_to reservations_path, alert: "Unable to update reservation."
+  #   end
+  # end
   def update
-    if @reservation.user == current_user && @reservation.status == "pending" && @reservation.update(reservation_params)
-      redirect_to @reservation, notice: "Reservation updated successfully."
+    if @reservation = Reservation.find(params[:id])
+      if @reservation.update(reservation_params)
+        redirect_to owner_reservations_path, notice: "Reservation updated successfully."
+      else
+        redirect_to owner_reservations_path, alert: "Unable to update reservation."
+      end
     else
-      redirect_to reservations_path, alert: "Unable to update reservation."
+      redirect_to owner_reservations_path, alert: "This reservation has already been processed."
     end
   end
+
 
   def destroy
     if @reservation.user == current_user || @reservation.camera.user == current_user
@@ -59,6 +71,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date)
+    params.require(:reservation).permit(:status, :start_date, :end_date)
   end
 end
