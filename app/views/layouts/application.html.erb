@@ -15,7 +15,10 @@
     <% unless controller.controller_name == 'pages' && controller.action_name == 'home' %>
     <%= render "shared/navbar" %>
     <% end %>
+    <div class="content">
     <%= yield %>
+    </div>
+
     <%= render "shared/flashes" %>
     <% unless controller.controller_name == 'pages' && controller.action_name == 'home' %>
       <%= render "shared/footer" %>
