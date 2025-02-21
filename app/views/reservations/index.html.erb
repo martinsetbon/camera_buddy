@@ -8,8 +8,8 @@
         <% end %>
         <div>
           <h3><%= reservation.camera.brand %> <%= reservation.camera.model %></h3>
-          <p><%= reservation.start_date %></p>
-          <p><%= reservation.end_date %></p>
+          <p><%= reservation.start_date.strftime('%B %d, %Y') %> to
+          <%= reservation.end_date.strftime('%B %d, %Y') %></p>
           <p><%= reservation.status.capitalize %></p>
         </div>
       </div>
