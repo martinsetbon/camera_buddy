@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   # before_action :set_review, only: [:destroy]
   before_action :authenticate_user!
 
-
   def create
     @review = @camera.reviews.new(review_params)
     @review.user = current_user
@@ -17,9 +16,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-      @review = Review.find(params[:id])
-      @review.destroy
-      redirect_to camera_path(@review.camera), status: :see_other
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to camera_path(@review.camera), status: :see_other
   end
 
   private
