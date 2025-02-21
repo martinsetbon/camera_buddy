@@ -11,25 +11,29 @@
 
   <div class="filters d-flex justify-content-between align-items-center border border-dark rounded-pill p-3 mb-3 mt-3">
     <!-- Link to filter by Canon brand -->
-
+    <div class="flex-fill border-end border-dark">
     <%= link_to cameras_path(brand: 'Canon') do %>
       <%= image_tag("canon.png", alt: "Canon", class: "brand-logo") %>
     <% end %>
-
+    </div>
+    <div class="logo-margin-left flex-fill border-end border-dark">
     <!-- Link to filter by Fujifilm brand -->
     <%= link_to cameras_path(brand: "Fujifilm") do %>
       <%= image_tag("fujifilm.png", alt: "Fujifilm", class: "brand-logo") %>
     <% end %>
-
+    </div>
+    <div class="logo-margin-left flex-fill border-end border-dark">
     <!-- Link to filter by Nikon brand -->
     <%= link_to cameras_path(brand: "Nikon") do %>
       <%= image_tag("nikon.png", alt: "Nikon", class: "brand-logo") %>
     <% end %>
-
+    </div>
+    <div class="logo-margin-left flex-fill">
     <!-- Link to filter by Sony brand -->
     <%= link_to cameras_path(brand: "Sony") do %>
       <%= image_tag("sony.png", alt: "Sony", class: "brand-logo") %>
     <% end %>
+    </div>
   </div>
 
 
