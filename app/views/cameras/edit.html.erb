@@ -1,0 +1,31 @@
+
+<div class="container">
+  <h1>Edit camera</h1>
+  <!-- form_with will build the form using the empty instance you give it -->
+  <!-- <form action="/cameras" method="post"></form> -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 m-auto">
+      <div class="camera-form">
+  <h1>Edit this camera</h1>
+  <!-- form_with will build the form using the empty instance you give it -->
+  <!-- <form action="/cameras" method="post"></form> -->
+<%= simple_form_for @camera do |f| %>
+  <div class="form-group">
+    <%= f.label :brand, "Select Brand" %>
+    <%= f.select :brand, Camera::BRANDS, {}, class: "form-control" %>
+  </div>
+  <%= f.input :model, input_html: { placeholder: 'Enter model name' } %>
+  <%= f.input :description, wrapper_html: { class: 'form-group' }, input_html: { placeholder: 'Enter camera description' } %>
+  <%= f.input :price, input_html: { placeholder: 'Price per day (in $)' } %>
+    <div class="form-group">
+    <%= f.label :photo, "Upload Picture" %>
+    <%= f.file_field :photo, class: "form-control" %>
+  </div>
+  <%= f.submit 'Submit', class: 'btn btn-success mt-3' %>
+<% end %>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

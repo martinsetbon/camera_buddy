@@ -3,13 +3,13 @@
   <% if @reservations.any? %>
     <% @reservations.each do |reservation| %>
       <div class="reservation-card reservation-card-infos">
-        <%= link_to camera_path(reservation.camera) do %>
+        <%= link_to camera_path(reservation.camera.photo) do %>
           <%= image_tag reservation.camera.photo %>
         <% end %>
         <div>
           <h3><%= reservation.camera.brand %> <%= reservation.camera.model %></h3>
-          <p><%= reservation.start_date %></p>
-          <p><%= reservation.end_date %></p>
+          <p><%= reservation.start_date.strftime('%B %d, %Y') %> to
+          <%= reservation.end_date.strftime('%B %d, %Y') %></p>
           <p><%= reservation.status.capitalize %></p>
         </div>
       </div>

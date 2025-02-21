@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="text-center">My Cameras</h1>
+
+  <!-- Loop through all cameras -->
+  <% @cameras.each do |camera| %>
+    <div class="card mb-4">
+      <div class="card-body d-flex flex-column flex-md-row">
+        <%= link_to image_tag(camera.photo, class: "card-img-top img-fluid", style: "max-width: 400px; height: auto; margin: 0 auto;"), camera_path(camera) %>
+        <div class="card-body">
+          <h5 class="card-title"><%= camera.brand %> <%= camera.model %></h5>
+
+          <!-- Reservation Requests Section -->
+          <div class="flex-grow-1 overflow-auto" style="max-height: 300px;">
+            <% if camera.reservations.any? %>
+              <% camera.reservations.each do |reservation| %>
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <h6 class="card-title">Reservation by</h6>
+                    <p><%= reservation.status %></p>
+                    <p><strong>Start Date:</strong> <%= reservation.start_date.strftime('%B %d, %Y') %></p>
+                    <p><strong>End Date:</strong> <%= reservation.end_date.strftime('%B %d, %Y') %></p>
+
+                    <!-- Form to accept, reject, or cancel the reservation -->
+                    <% if reservation.pending? %>
+                      <%= simple_form_for reservation do |f| %>
+                        <%= f.input :status, as: :hidden, input_html: { value: 'accepted'} %>
+                        <%= f.submit 'Accept', class: 'btn btn-info' %>
+                      <% end %>
+
+                      <%= simple_form_for reservation do |f| %>
+                        <%= f.input :status, as: :hidden, input_html: { value: 'rejected'} %>
+                        <%= f.submit 'Reject', class: 'btn btn-light' %>
+                      <% end %>
+                    <% else %>
+                      <p><%= reservation.status %></p>
+                  <% end %>
+
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p>No reservations for this camera yet.</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
