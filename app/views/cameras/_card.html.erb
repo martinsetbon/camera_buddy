@@ -15,6 +15,7 @@
     <span><%= camera.brand %></span>
     </div>
     <p class="card-text"><%= camera.description %></p>
+    <p class="card-text address"><%= camera.address %></p>
     <div class="d-flex justify-content-between align-items-end">
      <%= link_to "see details", camera_path(camera), class: 'btn btn-primary' %>
      <span>$<%= camera.price %></span>

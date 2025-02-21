@@ -1,0 +1,17 @@
+<%= link_to camera_path(camera) do %>
+<div class="info-window">
+<div class="p-2">
+  <%= cl_image_tag(camera.photo.key) %>
+</div>
+    <hr>
+  <div class="card-body p-2">
+    <h2 class="card-text text-center"><%= camera.model %></h2>
+    <hr>
+    <div class="d-flex justify-content-between align-item-center">
+<p class="card-text fs-6"><%= camera.brand %></p>
+
+<p class="card-text fs-6">$<%= camera.price %> / day</p>
+</div>
+  </div>
+</div>
+<% end %>

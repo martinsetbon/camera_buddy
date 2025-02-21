@@ -10,6 +10,15 @@ class CamerasController < ApplicationController
         else
           @cameras = Camera.all
         end
+
+        @markers = @cameras.geocoded.map do |camera|
+          {
+            lat: camera.latitude,
+            lng: camera.longitude,
+            info_window_html: render_to_string(partial: "info_window", locals: {camera: camera}),
+            marker_html: render_to_string(partial: "marker", locals: {camera: camera}) # Pass the camera to the partial
+          }
+        end
   end
 
   # '/cameras/1'

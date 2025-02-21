@@ -20,6 +20,12 @@ width: 100px
   align-items: center;
 }
 
+.address{
+  font-size: 12px;
+  font-style: italic;
+  color: grey;
+}
+
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
   .cards {
