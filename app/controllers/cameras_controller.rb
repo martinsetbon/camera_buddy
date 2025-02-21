@@ -26,6 +26,8 @@ class CamerasController < ApplicationController
     # Rails pulls the id from the URL and puts in the params
     @camera = Camera.find(params[:id])
     @reservation = Reservation.new
+    @reviews = @camera.reviews.includes(:user)
+    @review = Review.new
   end
 
   # '/cameras/new'
@@ -78,6 +80,6 @@ class CamerasController < ApplicationController
 
   def camera_params
     # for security reasons, we are whitelisting our params
-    params.require(:camera).permit(:brand, :model, :description, :price, :photo)
+    params.require(:camera).permit(:brand, :model, :description, :price, :address, :photo)
   end
 end

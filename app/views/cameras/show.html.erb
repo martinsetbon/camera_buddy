@@ -1,33 +1,84 @@
+<div class="show-container container mt-5">
+
+  <h3 class="text-center mb-4 text-primary" style="font-size: 2.2rem;">
+    <%= @camera.brand %> - <%= @camera.model %>
+  </h3>
 <div class="container mt-5">
   <!-- Camera Title -->
   <h3 class="text-center mb-4 text-primary"><%= @camera.brand %> - <%= @camera.model %></h3>
 
   <div class="card mb-4 mx-auto" style="max-width: 1100px;">
     <div class="row g-0">
-      <!-- Camera Image -->
       <div class="col-md-6">
 
         <%= cl_image_tag(@camera.photo.key, class: "img-fluid rounded-start h-100 w-100", alt: @camera.brand) %>
 
       </div>
 
-      <!-- Camera Details -->
       <div class="col-md-6 d-flex align-items-center">
-        <div class="card-body">
-          <p class="card-text text-muted"><%= @camera.description %></p>
-          <p class="card-text"><strong>Price:</strong> ¥<%= @camera.price %></p>
-
-          <!-- Reserve Button (Collapsible Form) -->
           <button class="btn btn-outline-primary w-100 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#reserveForm">
             📅 Reserve This Camera
           </button>
           <div class="collapse mt-3" id="reserveForm">
+            <%# <label>Select a date:</label> %>
             <%= render 'reservations/form', reservation: @reservation, camera: @camera %>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Add Review Form -->
+  <div class="card p-4 mt-4 mx-auto w-100" style="max-width: 1100px;">
+    <h5 class="mb-3">Leave a Review</h5>
+    <%= simple_form_for [@camera, @review] do |f| %>
+    <div class="mb-3">
+      <%= f.label :rating, "Rating" %>
+      <div class="star-rating">
+        <% 5.times do |i| %>
+          <input type="radio" name="review[rating]" value="<%= i + 1 %>" <%= "checked" if i == 2 %> />
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= f.label :comment, "Your Review" %>
+      <%= f.text_area :comment, class: "form-control", required: true %>
+    </div>
+    <%= f.submit "Submit Review", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+    <!-- Reviews Section -->
+  <div class="card p-4 mt-4 mx-auto w-100" style="max-width: 1100px;">
+    <h5 class="mb-3">Recent Reviews</h5>
+
+    <% if @camera.reviews.any? %>
+      <% @camera.reviews.each do |review| %>
+        <div class="border-bottom pb-3 mb-4">
+          <!-- User Info & Rating -->
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <p class="mb-1 fw-bold"><%= review.user.email.split('@').first.capitalize %></p>
+              <p class="text-muted mb-0" style="font-size: 0.9rem;"><%= review.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+            <div class="d-flex align-items-center">
+              <p class="mb-0 text-warning me-2" style="font-size: 1.1rem;">
+                <% review.rating.times { %>⭐<% } %>
+              </p>
+              <span class="fw-bold"><%= review.rating %>/5</span>
+            </div>
+          </div>
+
+          <!-- Review Comment -->
+          <p class="mt-2"><%= review.comment %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted">No reviews yet. Be the first to review!</p>
+    <% end %>
+  </div>
+
+ </div>
 
   <!-- Back to Home Button -->
   <div class="text-center mt-4">
