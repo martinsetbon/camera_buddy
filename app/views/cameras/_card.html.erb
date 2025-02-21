@@ -1,24 +1,36 @@
 <div class="card" style="width: 18rem;">
-<div class="photo-wrapper">
-<% if camera.photo.attached? %>
-<%= cl_image_tag(camera.photo.key, class: "card-img-top") %>
-<% else %>
- <div class="d-flex align-items-center card-img-top justify-content-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%=  asset_path('no-photo.png') %>); background-size:cover; background-position:center; height:250px;">
- Please Upload a picture
- </div>
-<% end %>
-
-</div>
+  <div class="photo-wrapper">
+    <% if camera.photo.attached? %>
+      <%= cl_image_tag(camera.photo.key, class: "card-img-top") %>
+    <% else %>
+      <div class="d-flex align-items-center card-img-top justify-content-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= asset_path('no-photo.png') %>); background-size:cover; background-position:center; height:250px;">
+        Please Upload a picture
+      </div>
+    <% end %>
+  </div>
   <div class="card-body">
-  <div class="d-flex justify-content-between">
-    <h5 class="card-title"><%= camera.model %></h5>
-    <span><%= camera.brand %></span>
+    <div class="d-flex justify-content-between align-items-start">
+      <h5 class="card-title"><%= camera.model %></h5>
+      <span>
+        <% case camera.brand %>
+          <% when "Canon" %>
+            <%= image_tag("canon.png", alt: "Canon", class: "brand-logo-card" ) %>
+          <% when "Fujifilm" %>
+            <%= image_tag("fujifilm.png", alt: "Fujifilm", class: "brand-logo-card") %>
+          <% when "Nikon" %>
+            <%= image_tag("nikon.png", alt: "Nikon", class: "brand-logo-card") %>
+          <% when "Sony" %>
+            <%= image_tag("sony.png", alt: "Sony", class: "brand-logo-card") %>
+          <% else %>
+            <span>No logo available</span>
+        <% end %>
+      </span>
     </div>
     <p class="card-text"><%= camera.description %></p>
     <p class="card-text address"><%= camera.address %></p>
     <div class="d-flex justify-content-between align-items-end">
-     <%= link_to "see details", camera_path(camera), class: 'btn btn-primary' %>
-     <span>$<%= camera.price %></span>
-     </div>
+      <%= link_to "see details", camera_path(camera), class: 'btn btn-primary' %>
+      <span>$<%= camera.price %></span>
+    </div>
   </div>
 </div>

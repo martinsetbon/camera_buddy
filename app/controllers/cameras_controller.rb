@@ -78,6 +78,6 @@ class CamerasController < ApplicationController
 
   def camera_params
     # for security reasons, we are whitelisting our params
-    params.require(:camera).permit(:brand, :model, :description, :price, :photo)
+    params.require(:camera).permit(:brand, :model, :description, :price, :address, :photo)
   end
 end
