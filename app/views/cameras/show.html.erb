@@ -1,20 +1,37 @@
 <div class="show-container container mt-5">
 
-  <h3 class="text-center mb-4 text-primary" style="font-size: 2.2rem;">
-    <%= @camera.brand %> - <%= @camera.model %>
+  <h3 class="text-center mb-4" style="font-size: 2.2rem;">
+      <span>
+        <% case @camera.brand %>
+          <% when "Canon" %>
+            <%= image_tag("canon.png", alt: "Canon", class: "brand-logo-show" ) %>
+          <% when "Fujifilm" %>
+            <%= image_tag("fujifilm.png", alt: "Fujifilm", class: "brand-logo-show") %>
+          <% when "Nikon" %>
+            <%= image_tag("nikon.png", alt: "Nikon", class: "brand-logo-show") %>
+          <% when "Sony" %>
+            <%= image_tag("sony.png", alt: "Sony", class: "brand-logo-show") %>
+          <% else %>
+            <span>No logo available</span>
+        <% end %>
+      </span>
   </h3>
 
   <div class="show-card card mb-4 mx-auto" style="max-width: 1100px;">
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag @camera.photo,
-          class: "img-fluid h-100 w-100",
-          alt: @camera.brand,
-          style: "object-fit: cover; border-radius: 16px 0 0 16px;" %>
+          <% if @camera.photo.attached? %>
+            <%= cl_image_tag(camera.photo.key, class:"show-photo img-fluid h-100 w-100") %>
+          <% else %>
+          <div class="show-photo img-fluid h-100 w-100 d-flex align-items-center justify-content-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<%= asset_path('no-photo.png') %>); background-size:cover; background-position:center; height:250px;">
+            Please Upload a picture
+         </div>
+          <% end %>
       </div>
 
       <div class="col-md-6 d-flex align-items-center">
         <div class="card-main card-body">
+          <p class="card-text mt-3 fs-5"><strong><%= @camera.brand %>-<%= @camera.model %></strong></p>
           <p class="card-text mt-3 fs-5"><%= @camera.description %></p>
           <p class="card-text fs-4">
             <strong class="fs-4"></strong> $<%= @camera.price %>
