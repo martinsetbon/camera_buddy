@@ -14,9 +14,7 @@ A camera rental website built with Ruby on Rails
 - [PostgreSQL](https://www.postgresql.org/) - Database
 - [Bootstrap](https://getbootstrap.com/) — Styling
 - [Figma](https://www.figma.com) — Prototyping
-- 
-## Acknowledgements
-Inspired by Jane Mount's [Bibliophile](https://www.amazon.com/Bibliophile-Illustrated-Miscellany-Jane-Mount/dp/1452167230) and a story my father once told me: "Why do we keep books? ... We keep books because they remind us of the new perspectives and lessons we learned".
+  
 
 ## Team Members
 - [Martin Setbon][(https://www.linkedin.com/in/martin-setbon-89a9a3150/)]
